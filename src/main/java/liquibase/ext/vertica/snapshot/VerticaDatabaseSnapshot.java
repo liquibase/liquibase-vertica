@@ -12,6 +12,7 @@ import liquibase.snapshot.InvalidExampleException;
 import liquibase.snapshot.JdbcDatabaseSnapshot;
 import liquibase.snapshot.SnapshotControl;
 import liquibase.structure.DatabaseObject;
+import liquibase.structure.core.Schema;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -31,15 +32,18 @@ import java.util.Set;
 public class VerticaDatabaseSnapshot extends JdbcDatabaseSnapshot {
     VerticaCachingDatabaseMetaData verticaCachingDatabaseMetaData;
     ResultSetCache projectionsResultCache;
+    ResultSetCache tablesResultCache;
     public VerticaDatabaseSnapshot(DatabaseObject[] examples, Database database, SnapshotControl snapshotControl) throws DatabaseException, InvalidExampleException {
         super(examples, database, snapshotControl);
         projectionsResultCache = new ResultSetCache();
+        tablesResultCache = new ResultSetCache();
 
     }
 
     public VerticaDatabaseSnapshot(DatabaseObject[] examples, Database database) throws DatabaseException, InvalidExampleException {
         super(examples, database);
         projectionsResultCache = new ResultSetCache();
+        tablesResultCache = new ResultSetCache();
     }
 
 
@@ -94,17 +98,17 @@ public class VerticaDatabaseSnapshot extends JdbcDatabaseSnapshot {
                 }
 
                 @Override
-                public ResultSet fastFetchQuery() throws SQLException, DatabaseException {
+                public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
                     if (database instanceof VerticaDatabase) {
-                        return verticaQuery(false);
+                        return extract(verticaQuery(false));
                     }
                     return null;
                 }
 
                 @Override
-                public ResultSet bulkFetchQuery() throws SQLException, DatabaseException {
+                public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
                     if (database instanceof VerticaDatabase) {
-                        return verticaQuery(true);
+                        return extract(verticaQuery(true));
                     }
                     return null;
                 }
@@ -157,17 +161,17 @@ public class VerticaDatabaseSnapshot extends JdbcDatabaseSnapshot {
                 }
 
                 @Override
-                public ResultSet fastFetchQuery() throws SQLException, DatabaseException {
+                public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
                     if (database instanceof VerticaDatabase) {
-                        return verticaQuery(false);
+                        return extract(verticaQuery(false));
                     }
                     return null;
                 }
 
                 @Override
-                public ResultSet bulkFetchQuery() throws SQLException, DatabaseException {
+                public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
                     if (database instanceof VerticaDatabase) {
-                        return verticaQuery(true);
+                        return extract(verticaQuery(true));
                     }
                     return null;
                 }
@@ -192,6 +196,40 @@ public class VerticaDatabaseSnapshot extends JdbcDatabaseSnapshot {
                     Statement statement = ((JdbcConnection) database.getConnection()).createStatement();
                     return statement.executeQuery(sql);
 //                return this.executeQuery(sql, database);
+                }
+            });
+        }
+
+        public List<CachedRow> getTables(final String schemaName, final String table) throws SQLException, DatabaseException {
+            return tablesResultCache.get(new ResultSetCache.SingleResultSetExtractor(database){
+
+                @Override
+                public ResultSetCache.RowData rowKeyParameters(CachedRow row) {
+                    return new ResultSetCache.RowData(row.getString("TABLE_CAT"), row.getString("TABLE_SCHEM"), database, row.getString("TABLE_NAME"));
+                }
+
+                @Override
+                public ResultSetCache.RowData wantedKeyParameters() {
+                    return new ResultSetCache.RowData(null, schemaName, database, table);
+                }
+
+                @Override
+                public List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException {
+                    CatalogAndSchema catalogAndSchema = new CatalogAndSchema(null, schemaName).customize(database);
+
+
+                    String catalog = ((AbstractJdbcDatabase) database).getJdbcCatalogName(catalogAndSchema);
+                    String schema = ((AbstractJdbcDatabase) database).getJdbcSchemaName(catalogAndSchema);
+                    return extract(databaseMetaData.getTables(catalog, schema, table, new String[]{"TABLE"}));
+                }
+
+                @Override
+                public List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException {
+                    CatalogAndSchema catalogAndSchema = new CatalogAndSchema(null, schemaName).customize(database);
+
+                    String catalog = ((AbstractJdbcDatabase) database).getJdbcCatalogName(catalogAndSchema);
+                    String schema = ((AbstractJdbcDatabase) database).getJdbcSchemaName(catalogAndSchema);
+                    return extract(databaseMetaData.getTables(catalog, schema, null, new String[]{"TABLE"}));
                 }
             });
         }

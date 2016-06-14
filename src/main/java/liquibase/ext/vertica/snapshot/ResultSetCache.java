@@ -232,18 +232,18 @@ class ResultSetCache {
             super(database);
         }
 
-        public abstract ResultSet fastFetchQuery() throws SQLException, DatabaseException;
-        public abstract ResultSet bulkFetchQuery() throws SQLException, DatabaseException;
+        public abstract List<CachedRow> fastFetchQuery() throws SQLException, DatabaseException;
+        public abstract List<CachedRow> bulkFetchQuery() throws SQLException, DatabaseException;
 
         @Override
         public List<CachedRow> fastFetch() throws SQLException, DatabaseException {
-            return extract(fastFetchQuery());
+            return fastFetchQuery();
         }
 
 
         @Override
         public List<CachedRow> bulkFetch() throws SQLException, DatabaseException {
-            return extract(bulkFetchQuery());
+            return bulkFetchQuery();
         }
     }
 

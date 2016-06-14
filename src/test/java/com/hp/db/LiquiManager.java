@@ -62,7 +62,7 @@ public class LiquiManager {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(
-                    "jdbc:vertica://192.168.56.101:5433/CIDB2",
+                    "jdbc:vertica://localhost:5433/CIDB2",
                     myProp);
             conn.setAutoCommit(false);
         } catch (SQLException e) {

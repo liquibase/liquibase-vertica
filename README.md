@@ -1,4 +1,4 @@
 liquibase-vertica
 =================
 
-Liquibase extension to add improved Vertica support
+Liquibase extension to add improved HP Vertica support

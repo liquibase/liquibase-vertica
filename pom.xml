@@ -125,9 +125,9 @@
         <dependency>
             <artifactId>com.vertica</artifactId>
             <groupId>vertica-jdbc</groupId>
-            <version>7.1.0</version>
+            <version>9.1.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/vertica-jdbc-7.1.0-0.jar</systemPath>
+            <systemPath>${basedir}/lib/vertica-jdbc-9.1.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>

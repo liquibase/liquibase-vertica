@@ -1,0 +1,9 @@
+language: java
+script: 
+   - mvn clean install
+branches:
+ only:
+   - master
+   - feature
+jenkins:
+  pipeline_jenkinsfile: Jenkinsfile

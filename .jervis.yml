@@ -1,9 +1,14 @@
+# Initial Jenkins NG file
+# See https://github.com/integralads/re-documentation/tree/master/jenkins-ng
+# This file is for initial onboarding.  It will always exit the build with
+# "success" because /bin/true is a Linux command that always successfully exits.
+
 language: java
 script: 
    - mvn clean install
 branches:
  only:
    - master
-   - feature
+   - /^[0-9.]+-hotfix$/
 jenkins:
   pipeline_jenkinsfile: Jenkinsfile

@@ -108,7 +108,7 @@
     <properties>
         <!--<oracle.version>11.2.0.3</oracle.version>-->
         <slf4j.version>1.7.5</slf4j.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13</junit.version>
         <postgres.version>9.2-1003-jdbc4</postgres.version>
     </properties>
     <dependencies>

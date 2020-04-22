@@ -4,6 +4,7 @@ package liquibase.ext.vertica.precondition;
 
         import liquibase.changelog.ChangeSet;
         import liquibase.changelog.DatabaseChangeLog;
+        import liquibase.changelog.visitor.ChangeExecListener;
         import liquibase.database.Database;
         import liquibase.database.DatabaseConnection;
         import liquibase.database.jvm.JdbcConnection;
@@ -85,7 +86,7 @@ public class ColumnExistsPrecondition implements Precondition {
     }
 
     @Override
-    public void check(Database database, DatabaseChangeLog changeLog, ChangeSet changeSet) throws PreconditionFailedException, PreconditionErrorException {
+    public void check(Database database, DatabaseChangeLog changeLog, ChangeSet changeSet, ChangeExecListener changeExecListener) throws PreconditionFailedException, PreconditionErrorException {
         Column example = new Column();
         if (StringUtils.trimToNull(getTableName()) != null) {
             example.setRelation(new Table().setName(getTableName()).setSchema(new Schema(getCatalogName(), getSchemaName())));

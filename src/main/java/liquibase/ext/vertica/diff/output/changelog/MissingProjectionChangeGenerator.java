@@ -4,7 +4,9 @@ import liquibase.change.Change;
 import liquibase.change.ConstraintsConfig;
 import liquibase.database.Database;
 import liquibase.datatype.DataTypeFactory;
+import liquibase.diff.compare.CompareControl;
 import liquibase.diff.output.DiffOutputControl;
+import liquibase.diff.output.changelog.AbstractChangeGenerator;
 import liquibase.diff.output.changelog.ChangeGeneratorChain;
 import liquibase.diff.output.changelog.MissingObjectChangeGenerator;
 import liquibase.ext.vertica.change.ColumnConfigVertica;
@@ -22,7 +24,7 @@ import java.util.Date;
 /**
  * Created by vesterma on 08/01/14.
  */
-public class MissingProjectionChangeGenerator implements MissingObjectChangeGenerator {
+public class MissingProjectionChangeGenerator extends AbstractChangeGenerator implements MissingObjectChangeGenerator {
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
         if (database instanceof VerticaDatabase)
@@ -132,5 +134,15 @@ public class MissingProjectionChangeGenerator implements MissingObjectChangeGene
         return new Change[] {
                 change
         };
+    }
+
+    @Override
+    public Change[] fixSchema(Change[] changes, CompareControl.SchemaComparison[] schemaComparisons) {
+        return new Change[0];
+    }
+
+    @Override
+    public Change[] fixOutputAsSchema(Change[] changes, CompareControl.SchemaComparison[] schemaComparisons) {
+        return new Change[0];
     }
 }

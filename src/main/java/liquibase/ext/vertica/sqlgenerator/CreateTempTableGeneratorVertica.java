@@ -111,7 +111,7 @@ public class CreateTempTableGeneratorVertica extends AbstractSqlGenerator<Create
             if (isAutoIncrementColumn) {
                 // TODO: check if database supports auto increment on non primary key column
                 if (database.supportsAutoIncrement()) {
-                    String autoIncrementClause = database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(), autoIncrementConstraint.getIncrementBy());
+                    String autoIncrementClause = database.getAutoIncrementClause(autoIncrementConstraint.getStartWith(), autoIncrementConstraint.getIncrementBy(), autoIncrementConstraint.getGenerationType(), autoIncrementConstraint.getDefaultOnNull());
 
                     if (!"".equals(autoIncrementClause)) {
                         sql.append(" ").append(autoIncrementClause);
@@ -137,7 +137,7 @@ public class CreateTempTableGeneratorVertica extends AbstractSqlGenerator<Create
                 sql.append(" PRIMARY KEY ");
             }
 
-            if (statement.getNotNullColumns().contains(column)) {
+            if (statement.getNotNullColumns().containsKey(column)) {
                 sql.append(" NOT NULL");
             }
 

@@ -60,7 +60,7 @@ public class DiffToChangeSetLog extends DiffToChangeLog {
 
         List<ChangeSet> changeSets = new ArrayList<ChangeSet>();
         ObjectQuotingStrategy quotingStrategy = ObjectQuotingStrategy.QUOTE_ALL_OBJECTS;
-        ChangeSet changeSet = new ChangeSet(generateId(), getChangeSetAuthor(), false, false,null, changeSetContext, null, quotingStrategy, null);
+        ChangeSet changeSet = new ChangeSet(generateId(null), getChangeSetAuthor(), false, false,null, changeSetContext, null, quotingStrategy, null);
         List<Class<? extends DatabaseObject>> types = getOrderedOutputTypes(MissingObjectChangeGenerator.class);
         for (Class<? extends DatabaseObject> type : types) {
             for (DatabaseObject object : diffResult.getMissingObjects(type, comparator)) {

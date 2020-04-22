@@ -6,6 +6,7 @@ import liquibase.database.Database;
 import liquibase.database.core.MySQLDatabase;
 import liquibase.datatype.DataTypeFactory;
 import liquibase.diff.output.DiffOutputControl;
+import liquibase.diff.output.changelog.AbstractChangeGenerator;
 import liquibase.diff.output.changelog.ChangeGeneratorChain;
 import liquibase.diff.output.changelog.MissingObjectChangeGenerator;
 import liquibase.ext.vertica.change.ColumnConfigVertica;
@@ -22,7 +23,7 @@ import java.util.Date;
 /**
  * Created by vesterma on 06/02/14.
  */
-public class MissingTableChangeGeneratorVertica  implements MissingObjectChangeGenerator {
+public class MissingTableChangeGeneratorVertica extends AbstractChangeGenerator implements MissingObjectChangeGenerator {
     @Override
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
         if (database instanceof VerticaDatabase)

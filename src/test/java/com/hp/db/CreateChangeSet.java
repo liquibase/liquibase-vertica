@@ -60,7 +60,7 @@ public class CreateChangeSet {
             boolean includeCatalog = false; //Boolean.parseBoolean(getCommandParam("includeCatalog", "false"));
             boolean includeSchema = false; //Boolean.parseBoolean(getCommandParam("includeSchema", "false"));
             boolean includeTablespace = false; //Boolean.parseBoolean(getCommandParam("includeTablespace", "false"));
-            DiffOutputControl diffOutputControl = new DiffOutputControl(includeCatalog, includeSchema, includeTablespace);
+            DiffOutputControl diffOutputControl = new DiffOutputControl(includeCatalog, includeSchema, includeTablespace, null);
             CommandLineUtils.doGenerateChangeLog(changeLogFilePath, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtils.trimToNull(diffTypes), StringUtils.trimToNull(changeSetAuthor), StringUtils.trimToNull(changeSetContext), StringUtils.trimToNull(dataOutputDirectory), diffOutputControl);
             postChangeSetGenerationProcessing(changeLogFile);
         } catch (Exception e) {

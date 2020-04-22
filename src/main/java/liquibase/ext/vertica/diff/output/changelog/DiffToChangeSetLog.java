@@ -18,7 +18,7 @@ import liquibase.snapshot.SnapshotControl;
 import liquibase.snapshot.SnapshotGeneratorFactory;
 import liquibase.structure.DatabaseObject;
 import liquibase.structure.DatabaseObjectComparator;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class DiffToChangeSetLog extends DiffToChangeLog {
         changeLogWriter.setChangeSetAuthor(author);
         changeLogWriter.setChangeSetContext(context);
 
-        if (StringUtils.trimToNull(changeLogFile) != null) {
+        if (StringUtil.trimToNull(changeLogFile) != null) {
             changeLogWriter.print(changeLogFile);
         } else {
             PrintStream outputStream = System.out;

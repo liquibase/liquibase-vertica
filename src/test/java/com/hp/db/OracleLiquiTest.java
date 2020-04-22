@@ -1,6 +1,8 @@
 package com.hp.db;
 
 import liquibase.Liquibase;
+import liquibase.Scope;
+import liquibase.change.ChangeFactory;
 import liquibase.change.core.CreateTableChange;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.core.OracleDatabase;
@@ -43,8 +45,8 @@ public class OracleLiquiTest {
 
         OracleDatabase od = new OracleDatabase();
 
-        liquibase.change.ChangeFactory.getInstance().unregister("createTable");
-        liquibase.change.ChangeFactory.getInstance().register(CreateTableChange.class);
+        Scope.getCurrentScope().getSingleton(ChangeFactory.class).unregister("createTable");
+        Scope.getCurrentScope().getSingleton(ChangeFactory.class).register(new CreateTableChange());
 
         DatabaseConnection dc = new JdbcConnection(conn);
         od.setConnection(dc);
@@ -87,7 +89,7 @@ public class OracleLiquiTest {
             DiffOutputControl diffOutputControl = new DiffOutputControl(includeCatalog, includeSchema, includeTablespace);
 */
 //            try {
-//                DiffToChangeSetLog.doGenerateChangeLog(changeLogFile, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtils.trimToNull(diffTypes), StringUtils.trimToNull(changeSetAuthor), StringUtils.trimToNull(changeSetContext), StringUtils.trimToNull(dataOutputDirectory), diffOutputControl);
+//                DiffToChangeSetLog.doGenerateChangeLog(changeLogFile, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtil.trimToNull(diffTypes), StringUtil.trimToNull(changeSetAuthor), StringUtil.trimToNull(changeSetContext), StringUtil.trimToNull(dataOutputDirectory), diffOutputControl);
 //                CommandLineUtils.doDiffToChangeLog(changeLogFile,verticaDatabase,verticaDatabase1,diffOutputControl,"tables,projections");
 //            } catch (IOException e) {
 //                e.printStackTrace();

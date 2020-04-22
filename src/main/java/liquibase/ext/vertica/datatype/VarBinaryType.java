@@ -6,7 +6,7 @@ import liquibase.datatype.DataTypeInfo;
 import liquibase.datatype.DatabaseDataType;
 import liquibase.datatype.LiquibaseDataType;
 import liquibase.ext.vertica.database.VerticaDatabase;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 /**
  * Created by vesterma on 23/01/14.
@@ -18,7 +18,7 @@ public class VarBinaryType extends LiquibaseDataType {
 
     @Override
     public DatabaseDataType toDatabaseDataType(Database database) {
-        String originalDefinition = StringUtils.trimToEmpty(this.originalDefinition);
+        String originalDefinition = StringUtil.trimToEmpty(this.originalDefinition);
 
         if (database instanceof VerticaDatabase) {
             return new DatabaseDataType("VARBINARY", getParameters());

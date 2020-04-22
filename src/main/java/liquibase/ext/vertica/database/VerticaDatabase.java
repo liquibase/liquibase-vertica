@@ -1,6 +1,7 @@
 package liquibase.ext.vertica.database;
 
 import liquibase.CatalogAndSchema;
+import liquibase.Scope;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.ObjectQuotingStrategy;
@@ -13,7 +14,7 @@ import liquibase.statement.core.GetViewDefinitionStatement;
 import liquibase.statement.core.RawSqlStatement;
 import liquibase.structure.DatabaseObject;
 import liquibase.structure.core.Table;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.math.BigInteger;
 import java.sql.ResultSet;
@@ -231,7 +232,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
         if (schema == null) {
             return new CatalogAndSchema(null, getDefaultSchemaName());
         }
-        String schemaName = StringUtils.trimToNull(schema.getSchemaName());
+        String schemaName = StringUtil.trimToNull(schema.getSchemaName());
 
         if (schemaName == null) {
             schemaName = getDefaultSchemaName();
@@ -252,7 +253,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
             if (tableName == null) {
                 return false;
             }
-            return StringUtils.hasUpperCase(tableName) && StringUtils.hasLowerCase(tableName);
+            return StringUtil.hasUpperCase(tableName) && StringUtil.hasLowerCase(tableName);
         }
 
     @Override
@@ -296,7 +297,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
             } catch (Exception e) {
                 // TODO: Something?
                 e.printStackTrace();
-                LogFactory.getLogger().severe("Failed to get default catalog name from vertica", e);
+                Scope.getCurrentScope().getLog(getClass()).severe("Failed to get default catalog name from vertica", e);
             }
 
             return searchPaths;
@@ -315,7 +316,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
                 System.out.println("schema_name: "+schema);
                 return schema;
             } catch (Exception e) {
-                LogFactory.getLogger().info("Error getting default schema", e);
+                Scope.getCurrentScope().getLog(getClass()).info("Error getting default schema", e);
             }
             return null;
         }
@@ -335,7 +336,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
             if (res!=null)
                 return res.toString();
         } catch (Exception e) {
-            LogFactory.getLogger().info("Error got exception when running: " + query, e);
+            Scope.getCurrentScope().getLog(getClass()).info("Error got exception when running: " + query, e);
         }
         return null;
     }

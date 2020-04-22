@@ -14,7 +14,7 @@ import liquibase.integration.commandline.CommandLineUtils;
 import liquibase.resource.FileSystemResourceAccessor;
 import liquibase.snapshot.jvm.ForeignKeySnapshotGenerator;
 import liquibase.snapshot.jvm.UniqueConstraintSnapshotGenerator;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
@@ -111,7 +111,7 @@ public class LiquiManager {
             boolean includeTablespace = false; //Boolean.parseBoolean(getCommandParam("includeTablespace", "false"));
 //            DiffOutputControl diffOutputControl = new DiffOutputControl(includeCatalog, includeSchema, includeTablespace);
 //            try {
-////                DiffToChangeSetLog.doGenerateChangeLog(changeLogFile, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtils.trimToNull(diffTypes), StringUtils.trimToNull(changeSetAuthor), StringUtils.trimToNull(changeSetContext), StringUtils.trimToNull(dataOutputDirectory), diffOutputControl);
+////                DiffToChangeSetLog.doGenerateChangeLog(changeLogFile, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtil.trimToNull(diffTypes), StringUtil.trimToNull(changeSetAuthor), StringUtil.trimToNull(changeSetContext), StringUtil.trimToNull(dataOutputDirectory), diffOutputControl);
 ////                CommandLineUtils.doDiffToChangeLog(changeLogFile, verticaDatabase, verticaDatabase1, diffOutputControl, "tables,projections");
 //            } catch (IOException e) {
 //                e.printStackTrace();

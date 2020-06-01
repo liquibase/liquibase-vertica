@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-verticaDatabase</artifactId>
-    <version>1.2-1-SNAPSHOT</version>
+    <version>3.9.0</version>
     <name>Liquibase Vertica Database Integration</name>
     <description>Liquibase extension for HP's Vertica database</description>
     <url>https://github.com/liquibase/liquibase-verticaDatabase</url>
@@ -23,7 +23,7 @@
     <scm>
         <connection>scm:git:http://github.com/liquibase/liquibase-vertica.git</connection>
         <url>https://github.com/liquibase/liquibase-vertica</url>
-        <tag>HEAD</tag>
+        <tag>liquibase-verticaDatabase-3.9.0</tag>
     </scm>
     <developers>
         <developer>

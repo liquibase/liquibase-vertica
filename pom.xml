@@ -59,7 +59,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
-            <version>3.9.0</version>
+            <version>3.10.0</version>
         </dependency>
         <dependency>
             <artifactId>com.vertica</artifactId>

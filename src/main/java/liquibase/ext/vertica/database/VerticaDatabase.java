@@ -276,7 +276,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
                 DatabaseConnection con = getConnection();
 
                 if (con != null) {
-                    String searchPathResult = (String) ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("SHOW search_path"), String.class);
+                    String searchPathResult = (String) Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", this).queryForObject(new RawSqlStatement("SHOW search_path"), String.class);
 
                     if (searchPathResult != null) {
                         String dirtySearchPaths[] = searchPathResult.split("\\,");
@@ -351,14 +351,14 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
         }
 
         private boolean runExistsQuery(String query) throws DatabaseException {
-            Long count = ExecutorService.getInstance().getExecutor(this).queryForLong(new RawSqlStatement(query));
+            Long count = Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", this).queryForLong(new RawSqlStatement(query));
 
             return count != null && count > 0;
         }
 
     public String getProjectionDefinition(CatalogAndSchema schema, String projectionName) throws DatabaseException {
         schema = correctSchema(schema);
-        List<String> defLines = (List<String>) ExecutorService.getInstance().getExecutor(this).queryForList(new GetProjectionDefinitionStatement(schema.getCatalogName(), schema.getSchemaName(), projectionName), String.class);
+        List<String> defLines = (List<String>) Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", this).queryForList(new GetProjectionDefinitionStatement(schema.getCatalogName(), schema.getSchemaName(), projectionName), String.class);
         StringBuilder sb = new StringBuilder();
         for (String defLine : defLines) {
             sb.append(defLine);
@@ -384,7 +384,7 @@ public class VerticaDatabase extends  AbstractJdbcDatabase{
     public String getViewDefinition(CatalogAndSchema schema, final String viewName) throws DatabaseException {
         schema = schema.customize(this);
 //        String definition = (String) ExecutorService.getInstance().getExecutor(this).queryForObject(new GetViewDefinitionStatement(schema.getCatalogName(), schema.getSchemaName(), viewName), String.class);
-        String definition = (String) ExecutorService.getInstance().getExecutor(this).queryForObject(new RawSqlStatement("select view_definition from views  where table_name='"+viewName+"' and table_schema='"+schema.getSchemaName()+"'"), String.class);
+        String definition = (String) Scope.getCurrentScope().getSingleton(ExecutorService.class).getExecutor("jdbc", this).queryForObject(new RawSqlStatement("select view_definition from views  where table_name='"+viewName+"' and table_schema='"+schema.getSchemaName()+"'"), String.class);
         if (definition == null) {
             return null;
         }

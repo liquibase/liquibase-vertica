@@ -6,7 +6,7 @@
     <version>4.0.0-beta3-SNAPSHOT</version>
     <name>Liquibase Vertica Database Integration</name>
     <description>Liquibase extension for HP's Vertica database</description>
-    <url>https://github.com/liquibase/liquibase-vertica</url>
+    <url>http://github.com/liquibase/liquibase-vertica</url>
     <organization>
         <name>HP</name>
         <url>http://www.hp.com</url>
@@ -19,7 +19,7 @@
     </licenses>
     <scm>
           <connection>scm:git:http://github.com/liquibase/liquibase-vertica.git</connection>
-          <url>scm:git:https://github.com/liquibase/liquibase-vertica.git</url>
+          <url>scm:git:http://github.com/liquibase/liquibase-vertica.git</url>
           <developerConnection>scm:git:https://github.com/liquibase/liquibase-vertica.git</developerConnection>
   	  <tag>liquibase-vertica-4.0.0-beta2</tag>
     </scm>

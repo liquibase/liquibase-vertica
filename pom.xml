@@ -18,7 +18,7 @@
         </license>
     </licenses>
     <scm>
-          <connection>scm:git:git@github.com:liquibase/liquibase-vertica.git</connection>
+          <connection>scm:git:http://github.com:liquibase/liquibase-vertica.git</connection>
           <url>scm:git:https://github.com/liquibase/liquibase-vertica.git</url>
           <developerConnection>scm:git:git@github.com:liquibase/liquibase-vertica.git</developerConnection>
   	  <tag>liquibase-vertica-4.0.0-beta2</tag>

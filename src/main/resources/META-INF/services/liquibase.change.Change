@@ -1,0 +1,5 @@
+liquibase.ext.vertica.change.AddVerticaColumnChange
+liquibase.ext.vertica.change.CreateProjectionChange
+liquibase.ext.vertica.change.CreateTableChangeVertica
+liquibase.ext.vertica.change.CreateTempTableChangeVertica
+liquibase.ext.vertica.change.DropProjectionChange

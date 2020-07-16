@@ -8,7 +8,7 @@ import liquibase.ext.vertica.statement.CreateProjectionStatement;
 import liquibase.ext.vertica.structure.GroupedColumns;
 import liquibase.ext.vertica.structure.Segmentation;
 import liquibase.statement.SqlStatement;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +88,7 @@ public class CreateProjectionChange extends AbstractChange implements ChangeWith
     }
 
     public void setSchemaName(String schemaName) {
-        this.schemaName = StringUtils.trimToNull(schemaName);
+        this.schemaName = StringUtil.trimToNull(schemaName);
     }
 
     public String getTableName() {
@@ -178,7 +178,7 @@ public class CreateProjectionChange extends AbstractChange implements ChangeWith
             names.add(col.getName() + "(" + col.getType() + ")");
         }
 
-        return "Columns " + StringUtils.join(names, ",") + " of " + getTableName() + " modified";*/
+        return "Columns " + StringUtil.join(names, ",") + " of " + getTableName() + " modified";*/
         return "Projection " + getProjectionName() + " has been created";
     }
 

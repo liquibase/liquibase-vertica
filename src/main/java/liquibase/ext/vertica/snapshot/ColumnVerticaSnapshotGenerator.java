@@ -1,5 +1,6 @@
 package liquibase.ext.vertica.snapshot;
 
+import liquibase.Scope;
 import liquibase.database.Database;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.datatype.DataTypeFactory;
@@ -18,7 +19,7 @@ import liquibase.snapshot.jvm.JdbcSnapshotGenerator;
 import liquibase.statement.DatabaseFunction;
 import liquibase.structure.DatabaseObject;
 import liquibase.structure.core.*;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -180,9 +181,9 @@ public class ColumnVerticaSnapshotGenerator extends JdbcSnapshotGenerator { //ex
             rawProjectionName =(String) columnMetadataResultSet.get("TABLE_NAME");
         }
         String rawColumnName = (String) columnMetadataResultSet.get("COLUMN_NAME");
-        String rawSchemaName = StringUtils.trimToNull((String) columnMetadataResultSet.get("TABLE_SCHEM"));
-        String rawCatalogName = StringUtils.trimToNull((String) columnMetadataResultSet.get("TABLE_CAT"));
-        String remarks = StringUtils.trimToNull((String) columnMetadataResultSet.get("REMARKS"));
+        String rawSchemaName = StringUtil.trimToNull((String) columnMetadataResultSet.get("TABLE_SCHEM"));
+        String rawCatalogName = StringUtil.trimToNull((String) columnMetadataResultSet.get("TABLE_CAT"));
+        String remarks = StringUtil.trimToNull((String) columnMetadataResultSet.get("REMARKS"));
         if (remarks != null) {
             remarks = remarks.replace("''", "'"); //come back escaped sometimes
         }
@@ -196,7 +197,7 @@ public class ColumnVerticaSnapshotGenerator extends JdbcSnapshotGenerator { //ex
 
         Boolean nullable = columnMetadataResultSet.getBoolean("NULLABLE");
         if (nullable == null) {
-            LogFactory.getLogger().info("Unknown nullable state for column " + column.toString() + ". Assuming nullable");
+            Scope.getCurrentScope().getLog(getClass()).info("Unknown nullable state for column " + column.toString() + ". Assuming nullable");
             column.setNullable(true);
         }else {
             column.setNullable(nullable);
@@ -222,7 +223,7 @@ public class ColumnVerticaSnapshotGenerator extends JdbcSnapshotGenerator { //ex
                     //TODO: verify if we still need this.
                     //probably older version of java, need to select from the column to find out if it is auto-increment
                     String selectStatement = "select " + database.escapeColumnName(rawCatalogName, rawSchemaName, rawProjectionName, rawColumnName) + " from " + database.escapeTableName(rawCatalogName, rawSchemaName, rawProjectionName) + " where 0=1";
-                    LogFactory.getLogger().debug("Checking "+rawProjectionName+"."+rawCatalogName+" for auto-increment with SQL: '"+selectStatement+"'");
+                    Scope.getCurrentScope().getLog(getClass()).fine("Checking "+rawProjectionName+"."+rawCatalogName+" for auto-increment with SQL: '"+selectStatement+"'");
                     Connection underlyingConnection = ((JdbcConnection) database.getConnection()).getUnderlyingConnection();
                     Statement statement = null;
                     ResultSet columnSelectRS = null;
@@ -455,7 +456,7 @@ public class ColumnVerticaSnapshotGenerator extends JdbcSnapshotGenerator { //ex
             } else if (liquibaseDataType instanceof VarcharType || type == Types.VARCHAR) {
                 return stringVal;
             }  else {
-                LogFactory.getLogger().info("Unknown default value: value '" + stringVal + "' type " + typeName + " (" + type + "), assuming it is a function");
+                Scope.getCurrentScope().getLog(getClass()).info("Unknown default value: value '" + stringVal + "' type " + typeName + " (" + type + "), assuming it is a function");
                 return new DatabaseFunction(stringVal);
             }
         } catch (ParseException e) {

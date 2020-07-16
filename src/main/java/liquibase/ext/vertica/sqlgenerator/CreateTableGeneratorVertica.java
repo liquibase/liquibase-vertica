@@ -1,5 +1,6 @@
 package liquibase.ext.vertica.sqlgenerator;
 
+import liquibase.Scope;
 import liquibase.database.Database;
 import liquibase.database.core.PostgresDatabase;
 import liquibase.datatype.DatabaseDataType;
@@ -13,7 +14,7 @@ import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.AutoIncrementConstraint;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -120,13 +121,13 @@ public class CreateTableGeneratorVertica extends AbstractSqlGenerator<CreateTabl
 //                        additionalSql.add(new UnparsedSql("alter sequence "+database.escapeSequenceName(statement.getCatalogName(), statement.getSchemaName(), sequenceName)+" start with "+autoIncrementConstraint.getStartWith(), new Sequence().setName(sequenceName).setSchema(statement.getCatalogName(), statement.getSchemaName())));
                     }
                 } else {
-                    LogFactory.getLogger().warning(database.getShortName()+" does not support autoincrement columns as request for "+(database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName())));
+                    Scope.getCurrentScope().getLog(getClass()).warning(database.getShortName()+" does not support autoincrement columns as request for "+(database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName())));
                 }
             }
 
             if (isPrimaryKeyColumn) {
 
-                String pkName = StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
+                String pkName = StringUtil.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
                 if (pkName != null) {
                     sql.append(" CONSTRAINT ");
                     sql.append(database.escapeConstraintName(pkName));

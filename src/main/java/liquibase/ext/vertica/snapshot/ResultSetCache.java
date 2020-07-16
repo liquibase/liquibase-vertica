@@ -6,7 +6,7 @@ import liquibase.exception.DatabaseException;
 import liquibase.executor.jvm.ColumnMapRowMapper;
 import liquibase.executor.jvm.RowMapperResultSetExtractor;
 import liquibase.snapshot.CachedRow;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -146,7 +146,7 @@ class ResultSetCache {
         }
 
         public String createKey(Database database, String... params) {
-            String key = StringUtils.join(params, ":");
+            String key = StringUtil.join(params, ":");
             if (!database.isCaseSensitive()) {
                 return key.toLowerCase();
             }

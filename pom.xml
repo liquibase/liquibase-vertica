@@ -41,7 +41,7 @@
     </developers>
     <properties>
         <slf4j.version>1.7.5</slf4j.version>
-        <junit.version>4.13.1</junit.version>
+        <junit.version>4.13.2</junit.version>
         <postgres.version>9.2-1003-jdbc4</postgres.version>
     </properties>
     <dependencies>

@@ -8,7 +8,7 @@ import liquibase.sqlgenerator.SqlGeneratorFactory;
 import liquibase.statement.*;
 import liquibase.statement.core.SetColumnRemarksStatement;
 import liquibase.statement.core.UpdateStatement;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -87,7 +87,7 @@ public class AddVerticaColumnChange extends AddColumnChange {
         }
 
         for (ColumnConfig column : getColumns()) {
-            String columnRemarks = StringUtils.trimToNull(column.getRemarks());
+            String columnRemarks = StringUtil.trimToNull(column.getRemarks());
             if (columnRemarks != null) {
                 SetColumnRemarksStatement remarksStatement = new SetColumnRemarksStatement("", getSchemaName(), getTableName(), column.getName(), columnRemarks);
                 if (SqlGeneratorFactory.getInstance().supports(remarksStatement, database)) {

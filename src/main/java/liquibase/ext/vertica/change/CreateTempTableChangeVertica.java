@@ -15,7 +15,7 @@ import liquibase.sqlgenerator.SqlGeneratorFactory;
 import liquibase.statement.*;
 import liquibase.statement.core.SetColumnRemarksStatement;
 import liquibase.statement.core.SetTableRemarksStatement;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +131,7 @@ public class CreateTempTableChangeVertica extends AbstractChange implements Chan
 
                 if (constraints.getReferences() != null ||
                         (constraints.getReferencedTableName() != null && constraints.getReferencedColumnNames() != null)) {
-                    if (StringUtils.trimToNull(constraints.getForeignKeyName()) == null) {
+                    if (StringUtil.trimToNull(constraints.getForeignKeyName()) == null) {
                         throw new UnexpectedLiquibaseException("createTable with references requires foreignKeyName");
                     }
                     ForeignKeyConstraint fkConstraint = new ForeignKeyConstraint(constraints.getForeignKeyName(),
@@ -153,7 +153,7 @@ public class CreateTempTableChangeVertica extends AbstractChange implements Chan
             }
         }
 
-        statement.setTablespace(StringUtils.trimToNull(getTablespace()));
+        statement.setTablespace(StringUtil.trimToNull(getTablespace()));
         statement.setSegmentation(getSegmentation());
         statement.setPartitionby(getPartitionby());
         statement.setOrderby(getOrderby());
@@ -164,7 +164,7 @@ public class CreateTempTableChangeVertica extends AbstractChange implements Chan
         List<SqlStatement> statements = new ArrayList<SqlStatement>();
         statements.add(statement);
 
-        if (StringUtils.trimToNull(remarks) != null) {
+        if (StringUtil.trimToNull(remarks) != null) {
             SetTableRemarksStatement remarksStatement = new SetTableRemarksStatement("", schemaName, tableName, remarks);
             if (SqlGeneratorFactory.getInstance().supports(remarksStatement, database)) {
                 statements.add(remarksStatement);
@@ -172,7 +172,7 @@ public class CreateTempTableChangeVertica extends AbstractChange implements Chan
         }
 
         for (ColumnConfig column : getColumns()) {
-            String columnRemarks = StringUtils.trimToNull(column.getRemarks());
+            String columnRemarks = StringUtil.trimToNull(column.getRemarks());
             if (columnRemarks != null) {
                 SetColumnRemarksStatement remarksStatement = new SetColumnRemarksStatement("", schemaName, tableName, column.getName(), columnRemarks);
                 if (SqlGeneratorFactory.getInstance().supports(remarksStatement, database)) {

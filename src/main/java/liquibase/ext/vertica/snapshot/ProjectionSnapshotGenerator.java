@@ -13,7 +13,7 @@ import liquibase.snapshot.InvalidExampleException;
 import liquibase.snapshot.jvm.JdbcSnapshotGenerator;
 import liquibase.structure.DatabaseObject;
 import liquibase.structure.core.Schema;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -56,7 +56,7 @@ public class ProjectionSnapshotGenerator extends JdbcSnapshotGenerator {
             projectionMetadataRs = (verticaDatabaseSnapshot).getMetaData().getProjectionDefinition(schema.getName(),example.getName());
             if (projectionMetadataRs.size() > 0) {
                 CachedRow row = projectionMetadataRs.get(0);
-                String rawSchemaName = StringUtils.trimToNull(row.getString("TABLE_SCHEM"));
+                String rawSchemaName = StringUtil.trimToNull(row.getString("TABLE_SCHEM"));
                 String rawProjectionName = row.getString("PROJ_NAME");
 
                 Projection projection = new Projection();

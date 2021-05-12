@@ -1,0 +1,2 @@
+liquibase.ext.vertica.diff.output.changelog.MissingProjectionChangeGenerator
+liquibase.ext.vertica.diff.output.changelog.MissingTableChangeGeneratorVertica

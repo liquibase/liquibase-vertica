@@ -8,7 +8,7 @@ import liquibase.diff.output.changelog.core.MissingColumnChangeGenerator;
 import liquibase.ext.vertica.database.VerticaDatabase;
 import liquibase.integration.commandline.CommandLineUtils;
 import liquibase.snapshot.jvm.UniqueConstraintSnapshotGenerator;
-import liquibase.util.StringUtils;
+import liquibase.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -61,7 +61,7 @@ public class CreateChangeSet {
             boolean includeSchema = false; //Boolean.parseBoolean(getCommandParam("includeSchema", "false"));
             boolean includeTablespace = false; //Boolean.parseBoolean(getCommandParam("includeTablespace", "false"));
             DiffOutputControl diffOutputControl = new DiffOutputControl(includeCatalog, includeSchema, includeTablespace, null);
-            CommandLineUtils.doGenerateChangeLog(changeLogFilePath, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtils.trimToNull(diffTypes), StringUtils.trimToNull(changeSetAuthor), StringUtils.trimToNull(changeSetContext), StringUtils.trimToNull(dataOutputDirectory), diffOutputControl);
+            CommandLineUtils.doGenerateChangeLog(changeLogFilePath, verticaDatabase, defaultCatalogName, defaultSchemaName, StringUtil.trimToNull(diffTypes), StringUtil.trimToNull(changeSetAuthor), StringUtil.trimToNull(changeSetContext), StringUtil.trimToNull(dataOutputDirectory), diffOutputControl);
             postChangeSetGenerationProcessing(changeLogFile);
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

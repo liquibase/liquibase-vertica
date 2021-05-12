@@ -1,0 +1,6 @@
+liquibase.ext.vertica.sqlgenerator.AddVerticaColumnGenerator
+liquibase.ext.vertica.sqlgenerator.CreateProjectionGeneratorVertica
+liquibase.ext.vertica.sqlgenerator.CreateTableGeneratorVertica
+liquibase.ext.vertica.sqlgenerator.CreateTempTableGeneratorVertica
+liquibase.ext.vertica.sqlgenerator.DropProjectionGenerator
+liquibase.ext.vertica.sqlgenerator.ModifyDataTypeGeneratorVertica

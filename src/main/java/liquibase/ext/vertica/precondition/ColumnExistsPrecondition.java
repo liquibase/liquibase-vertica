@@ -2,6 +2,7 @@ package liquibase.ext.vertica.precondition;
 
 
 
+        import liquibase.Scope;
         import liquibase.changelog.ChangeSet;
         import liquibase.changelog.DatabaseChangeLog;
         import liquibase.changelog.visitor.ChangeExecListener;
@@ -22,7 +23,7 @@ package liquibase.ext.vertica.precondition;
         import liquibase.structure.core.Schema;
         import liquibase.structure.core.Table;
         import liquibase.util.JdbcUtils;
-        import liquibase.util.StringUtils;
+        import liquibase.util.StringUtil;
 
         import java.sql.ResultSet;
         import java.sql.Statement;
@@ -88,7 +89,7 @@ public class ColumnExistsPrecondition implements Precondition {
     @Override
     public void check(Database database, DatabaseChangeLog changeLog, ChangeSet changeSet, ChangeExecListener changeExecListener) throws PreconditionFailedException, PreconditionErrorException {
         Column example = new Column();
-        if (StringUtils.trimToNull(getTableName()) != null) {
+        if (StringUtil.trimToNull(getTableName()) != null) {
             example.setRelation(new Table().setName(getTableName()).setSchema(new Schema(getCatalogName(), getSchemaName())));
         }
         example.setName(getColumnName());
@@ -105,7 +106,7 @@ public class ColumnExistsPrecondition implements Precondition {
 
         }else {
             if (columnExists.get(getTableName()).get(getColumnName())==null){
-                LogFactory.getLogger().debug("Column found in cache :"+ getColumnName());
+                Scope.getCurrentScope().getLog(getClass()).fine("Column found in cache :"+ getColumnName());
                 throw new PreconditionFailedException("Column '" + database.escapeColumnName(catalogName, schemaName, getTableName(), getColumnName()) + "' does not exist", changeLog, this);
             }
         }
@@ -170,7 +171,7 @@ public class ColumnExistsPrecondition implements Precondition {
             }
             columnExists.put(getTableName(),tableColumnsExists);
         } catch (Exception e) {
-            LogFactory.getLogger().info("Error fetching columns name from metadata ", e);
+            Scope.getCurrentScope().getLog(getClass()).info("Error fetching columns name from metadata ", e);
             throw new RuntimeException("Error fetching columns name from metadata ", e);
         } finally {
             JdbcUtils.closeResultSet(rs);

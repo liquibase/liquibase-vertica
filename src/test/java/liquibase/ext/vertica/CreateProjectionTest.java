@@ -7,6 +7,7 @@ package liquibase.ext.vertica;
  * To change this template use File | Settings | File Templates.
  */
 
+import liquibase.Scope;
 import liquibase.change.Change;
 import liquibase.change.ChangeFactory;
 import liquibase.change.ChangeMetaData;
@@ -48,9 +49,9 @@ public class CreateProjectionTest extends BaseTestCase{
     public void getChangeMetaData() {
         CreateProjectionChange createMaterializedViewChange = new CreateProjectionChange();
 
-        assertEquals("createMaterializedView", ChangeFactory.getInstance().getChangeMetaData(createMaterializedViewChange).getName());
-        assertEquals("Create Materialized View", ChangeFactory.getInstance().getChangeMetaData(createMaterializedViewChange).getDescription());
-        assertEquals(ChangeMetaData.PRIORITY_DEFAULT, ChangeFactory.getInstance().getChangeMetaData(createMaterializedViewChange).getPriority());
+        assertEquals("createMaterializedView", Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(createMaterializedViewChange).getName());
+        assertEquals("Create Materialized View", Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(createMaterializedViewChange).getDescription());
+        assertEquals(ChangeMetaData.PRIORITY_DEFAULT, Scope.getCurrentScope().getSingleton(ChangeFactory.class).getChangeMetaData(createMaterializedViewChange).getPriority());
     }
 
     @Ignore

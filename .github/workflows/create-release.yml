@@ -156,7 +156,7 @@ jobs:
           tag_name: liquibase-vertica-${{ needs.setup.outputs.extensionVersion }}
           draft: true
           body: Support for Liquibase ${{ needs.setup.outputs.liquibaseVersion }}.
-          files: liquibase-vertica-*.jar
+          files: liquibase-vertica*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -10,10 +10,11 @@ import liquibase.serializer.core.xml.XMLChangeLogSerializer;
  * Created by vesterma on 03/03/14.
  */
 
-public class CustomLogicNamespaceDetails implements NamespaceDetails {
+public class VerticaNamespaceDetails implements NamespaceDetails {
 
-    public static final String CUSTOM_LOGIC_NAMESPACE = "http://www.liquibase.org/xml/ns/dbchangelog-ext";
-    public static final String CUSTOM_LOGIC_XSD = "../liquibase/ext/vertica/xml/dbchangelog-ext.xsd";
+    public static final String VERTICA_NAMESPACE = "http://www.liquibase.org/xml/ns/dbchangelog-ext/vertica";
+
+    public static final String VERTICA_XSD = VERTICA_NAMESPACE + ".xsd";
 
     @Override
     public int getPriority() {
@@ -37,31 +38,23 @@ public class CustomLogicNamespaceDetails implements NamespaceDetails {
     }
 
     private boolean namespaceCorrect(String namespace) {
-        return namespace.equals(CUSTOM_LOGIC_NAMESPACE) || namespace.equals(CUSTOM_LOGIC_XSD);
+        return namespace.equals(VERTICA_NAMESPACE) || namespace.equals(VERTICA_XSD);
     }
 
     @Override
     public String getShortName(String namespace) {
-        return "vert";
+        return "vertica";
     }
 
     @Override
     public String getSchemaUrl(String namespace) {
-        return CUSTOM_LOGIC_XSD;
+        return VERTICA_XSD;
     }
 
     @Override
     public String[] getNamespaces() {
-//        return new String[0];
-        String[] namespaces = {"vert"};
-        return namespaces;
+        return new String[]{
+                VERTICA_NAMESPACE
+        };
     }
-
-
-    @Override
-    public String getLocalPath(String namespace) {
-        return "xml/dbchangelog-ext.xsd";
-
-    }
-
 }

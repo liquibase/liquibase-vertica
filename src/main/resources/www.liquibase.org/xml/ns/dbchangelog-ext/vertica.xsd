@@ -6,23 +6,7 @@
             elementFormDefault="qualified" >
 
     <xsd:import namespace="http://www.liquibase.org/xml/ns/dbchangelog"/>
-    <!--xsd:redefine schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-        <xsd:element name="createTable">
-            <xsd:complexType>
-                <xsd:sequence>
-                    <xsd:element ref="column" minOccurs="1" maxOccurs="unbounded"/>
-                </xsd:sequence>
-                <xsd:attributeGroup ref="tableNameAttribute"/>
-                <xsd:attribute name="subquery" type="xsd:string"/>
-                <xsd:attribute name="tablespace" type="xsd:string"/>
-                <xsd:attribute name="remarks" type="xsd:string"/>
-                <xsd:attribute name="orderby" type="xsd:string"/>
-                <xsd:attribute name="partitionby" type="xsd:string"/>
-                <xsd:attributeGroup ref="segmentation"/>
-                <xsd:attribute name="ksafe" type="xsd:integer"/>
-            </xsd:complexType>
-        </xsd:element>
-    </xsd:redefine-->
+
     <!-- Constraints state -->
     <xsd:simpleType name="propertyExpression" id="propertyExpression">
         <xsd:restriction base="xsd:string">
@@ -272,12 +256,4 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- AddVerticaColumn-->
-    <!--xsd:complexType name="addVerticaColumn">
-        <extension base="addColumn">
-            <xsd:sequence>
-                <xsd:element name="column"  minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </extension>
-    </xsd:complexType-->
 </xsd:schema>

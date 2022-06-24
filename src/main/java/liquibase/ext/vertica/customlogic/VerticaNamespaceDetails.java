@@ -14,7 +14,7 @@ public class VerticaNamespaceDetails implements NamespaceDetails {
 
     public static final String VERTICA_NAMESPACE = "http://www.liquibase.org/xml/ns/dbchangelog-ext/vertica";
 
-    public static final String VERTICA_XSD = VERTICA_NAMESPACE + ".xsd";
+    public static final String VERTICA_XSD = VERTICA_NAMESPACE + "-latest.xsd";
 
     @Override
     public int getPriority() {

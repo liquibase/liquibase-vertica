@@ -3,22 +3,16 @@ package com.hp.db;
 import liquibase.Liquibase;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.jvm.JdbcConnection;
-import liquibase.diff.output.DiffOutputControl;
 import liquibase.diff.output.changelog.ChangeGeneratorFactory;
 import liquibase.diff.output.changelog.core.MissingColumnChangeGenerator;
 import liquibase.exception.LiquibaseException;
 import liquibase.ext.vertica.database.VerticaDatabase;
-import liquibase.ext.vertica.diff.output.changelog.DiffToChangeSetLog;
 import liquibase.ext.vertica.snapshot.ColumnVerticaSnapshotGenerator;
-import liquibase.integration.commandline.CommandLineUtils;
-import liquibase.resource.FileSystemResourceAccessor;
+import liquibase.resource.DirectoryResourceAccessor;
 import liquibase.snapshot.jvm.ForeignKeySnapshotGenerator;
 import liquibase.snapshot.jvm.UniqueConstraintSnapshotGenerator;
-import liquibase.util.StringUtil;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
@@ -34,7 +28,7 @@ import java.util.Properties;
  * To change this template use File | Settings | File Templates.
  */
 public class LiquiManager {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
 
         VerticaDatabase verticaDatabase = new VerticaDatabase();
 //        verticaDatabase.setDefaultSchemaName("maas");
@@ -87,7 +81,7 @@ public class LiquiManager {
             }
             String changelog = f.getAbsolutePath();
 
-            liquibase = new Liquibase(changelog,new FileSystemResourceAccessor(),verticaDatabase);
+            liquibase = new Liquibase(changelog,new DirectoryResourceAccessor(new File(".")),verticaDatabase);
 //            liquibase = new Liquibase("C:\\Users\\vesterma\\Documents\\Projects\\liquibase\\target\\classes\\com.hp.db\\db_change1.xml", new FileSystemResourceAccessor(),dc);
 
 //            liquibase = new Liquibase("C:\\Temp\\test.xml", new FileSystemResourceAccessor(),dc);

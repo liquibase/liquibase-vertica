@@ -8,8 +8,7 @@ import liquibase.database.DatabaseConnection;
 import liquibase.database.core.OracleDatabase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
-import liquibase.ext.vertica.change.CreateTableChangeVertica;
-import liquibase.resource.FileSystemResourceAccessor;
+import liquibase.resource.DirectoryResourceAccessor;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -24,7 +23,7 @@ import java.util.Properties;
  */
 public class OracleLiquiTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Properties myProp = new Properties();
 
         myProp.put("user", "jony");
@@ -64,7 +63,7 @@ public class OracleLiquiTest {
             }
             String changelog = f.getAbsolutePath();
 
-            liquibase = new Liquibase(changelog, new FileSystemResourceAccessor(), dc);
+            liquibase = new Liquibase(changelog, new DirectoryResourceAccessor(new File(".")), dc);
 //            liquibase = new Liquibase("C:\\Users\\vesterma\\Documents\\Projects\\liquibase\\target\\classes\\com.hp.db\\db_change1.xml", new FileSystemResourceAccessor(),dc);
 
 //            liquibase = new Liquibase("C:\\Temp\\test.xml", new FileSystemResourceAccessor(),dc);

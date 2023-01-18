@@ -9,6 +9,7 @@ import liquibase.diff.DiffGeneratorFactory;
 import liquibase.diff.DiffResult;
 import liquibase.diff.ObjectDifferences;
 import liquibase.diff.compare.CompareControl;
+import liquibase.diff.compare.DatabaseObjectCollectionComparator;
 import liquibase.diff.output.DiffOutputControl;
 import liquibase.diff.output.changelog.*;
 import liquibase.exception.DatabaseException;
@@ -17,7 +18,6 @@ import liquibase.snapshot.InvalidExampleException;
 import liquibase.snapshot.SnapshotControl;
 import liquibase.snapshot.SnapshotGeneratorFactory;
 import liquibase.structure.DatabaseObject;
-import liquibase.structure.DatabaseObjectComparator;
 import liquibase.util.StringUtil;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,7 +56,7 @@ public class DiffToChangeSetLog extends DiffToChangeLog {
     @Override
     public List<ChangeSet> generateChangeSets() {
         final ChangeGeneratorFactory changeGeneratorFactory = ChangeGeneratorFactory.getInstance();
-        DatabaseObjectComparator comparator = new DatabaseObjectComparator();
+        DatabaseObjectCollectionComparator comparator = new DatabaseObjectCollectionComparator();
 
         List<ChangeSet> changeSets = new ArrayList<ChangeSet>();
         ObjectQuotingStrategy quotingStrategy = ObjectQuotingStrategy.QUOTE_ALL_OBJECTS;

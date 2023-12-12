@@ -18,6 +18,8 @@ jobs:
     needs: authorize
     uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@v0.5.8
     secrets: inherit
+    with:
+      extraCommand: mvn install:install-file -Dfile=lib/vertica-jdbc-7.1.0-0.jar -DgroupId=vertica-jdbc -DartifactId=com.vertica -Dversion=7.1.0 -Dpackaging=jar
     
   integration-tests:
     name: Java ${{ matrix.java }}

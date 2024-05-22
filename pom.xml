@@ -9,7 +9,7 @@
 
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-vertica</artifactId>
-    <version>4.27.0-SNAPSHOT</version>
+    <version>4.28.0-SNAPSHOT</version>
     <name>Liquibase Vertica Database Integration</name>
     <description>Liquibase extension for HP's Vertica database</description>
     <url>https://github.com/liquibase/liquibase-vertica</url>
@@ -40,7 +40,7 @@
         <slf4j.version>1.7.5</slf4j.version>
         <junit.version>4.13.2</junit.version>
         <postgres.version>9.2-1003-jdbc4</postgres.version>
-        <liquibase.version>4.27.0</liquibase.version>
+        <liquibase.version>4.28.0</liquibase.version>
     </properties>
     <dependencies>
         <dependency>

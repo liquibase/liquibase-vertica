@@ -5,6 +5,7 @@ import liquibase.exception.DatabaseException;
 import liquibase.ext.vertica.database.VerticaDatabase;
 import liquibase.snapshot.DatabaseSnapshot;
 import liquibase.snapshot.InvalidExampleException;
+import liquibase.snapshot.SnapshotGenerator;
 import liquibase.snapshot.jvm.UniqueConstraintSnapshotGenerator;
 import liquibase.structure.DatabaseObject;
 
@@ -25,13 +26,15 @@ public class UniqueConstraintSnapshotGeneratorVertica extends UniqueConstraintSn
 
     @Override
     protected DatabaseObject snapshotObject(DatabaseObject example, DatabaseSnapshot snapshot) throws DatabaseException {
-        System.out.println("in snapshot");
         return null;
     }
 
     @Override
     protected void addTo(DatabaseObject foundObject, DatabaseSnapshot snapshot) throws DatabaseException {
-        System.out.println("in addTo");
+    }
 
+    @Override
+    public Class<? extends SnapshotGenerator>[] replaces() {
+        return new Class[]{UniqueConstraintSnapshotGenerator.class};
     }
 }

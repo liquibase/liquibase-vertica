@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-parent-pom</artifactId>
+        <version>0.5.4</version>
+    </parent>
+
+    <groupId>org.liquibase.ext</groupId>
+    <artifactId>liquibase-vertica</artifactId>
+    <version>4.32.0-SNAPSHOT</version>
+    <name>Liquibase Vertica Database Integration</name>
+    <description>Liquibase extension for HP's Vertica database</description>
+    <url>https://github.com/liquibase/liquibase-vertica</url>
+
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+		<url>https://github.com/liquibase/liquibase-vertica.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+    <developers>
+        <developer>
+            <id>cohenjo</id>
+            <name>Jony Vesterman Cohen</name>
+            <email>cohenjo@hp.com</email>
+            <url>http://hp.com</url>
+            <organizationUrl>http://hp.com</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+2</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <slf4j.version>1.7.5</slf4j.version>
+        <junit.version>4.13.2</junit.version>
+        <postgres.version>9.2-1003-jdbc4</postgres.version>
+        <liquibase.version>4.32.0</liquibase.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <artifactId>com.vertica</artifactId>
+            <groupId>vertica-jdbc</groupId>
+            <version>7.1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/vertica-jdbc-7.1.0-0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.8.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.18.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <reportFormat>plain</reportFormat>
+                    <systemPropertyVariables>
+                        <com.athaydes.spockframework.report.outputDir>${project.build.directory}/spock-reports</com.athaydes.spockframework.report.outputDir>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <!-- Force using the latest JUnit 47 provider -->
+                    <dependency>
+                      <groupId>org.apache.maven.surefire</groupId>
+                      <artifactId>surefire-junit47</artifactId>
+                      <version>${maven-surefire-plugin.version}</version>
+                    </dependency>
+                  </dependencies>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <reportFormat>plain</reportFormat>
+                    <systemPropertyVariables>
+                        <com.athaydes.spockframework.report.outputDir>${project.build.directory}/spock-reports</com.athaydes.spockframework.report.outputDir>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <!-- Force using the latest JUnit 47 provider -->
+                    <dependency>
+                      <groupId>org.apache.maven.surefire</groupId>
+                      <artifactId>surefire-junit47</artifactId>
+                      <version>${maven-surefire-plugin.version}</version>
+                    </dependency>
+                  </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

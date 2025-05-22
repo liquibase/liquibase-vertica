@@ -2,14 +2,18 @@
 name: "Nightly build"
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 7 * * 1-5'
+    - cron: "0 7 * * 1-5"
+
+permissions:
+  contents: read
+  pull-requests: write
+  packages: read
 
 jobs:
-    nightly-build:
-      uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@main
-      with:
-        nightly: true
-        os: '["ubuntu-latest"]'
-        extraCommand: mvn install:install-file -Dfile=lib/vertica-jdbc-7.1.0-0.jar -DgroupId=vertica-jdbc -DartifactId=com.vertica -Dversion=7.1.0 -Dpackaging=jar
-      secrets: inherit
+  nightly-build:
+    uses: liquibase/build-logic/.github/workflows/os-extension-test.yml@main
+    with:
+      nightly: true
+    secrets: inherit

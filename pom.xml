@@ -50,11 +50,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <artifactId>com.vertica</artifactId>
-            <groupId>vertica-jdbc</groupId>
-            <version>7.1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/vertica-jdbc-7.1.0-0.jar</systemPath>
+            <groupId>com.vertica.jdbc</groupId>
+            <artifactId>vertica-jdbc</artifactId>
+            <version>24.4.0-0</version>
         </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>

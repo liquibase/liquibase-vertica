@@ -82,4 +82,3 @@ Create a label with the following settings:
 
 ## Useful Links
 *   [Advanced Java Setup for GitHub Actions](https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#gpg)
-*   [Deploying to Sonatype Nexus with Apache Maven](https://central.sonatype.org/publish/publish-maven/)

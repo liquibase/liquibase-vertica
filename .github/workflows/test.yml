@@ -20,6 +20,7 @@ jobs:
     secrets: inherit
     with:
       os: '["ubuntu-latest"]'
+      extraCommand: mvn install:install-file -Dfile=lib/vertica-jdbc-7.1.0-0.jar -DgroupId=vertica-jdbc -DartifactId=com.vertica -Dversion=7.1.0 -Dpackaging=jar
       
   dependabot:
     needs: build-test

@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-parent-pom</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
     </parent>
 
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-vertica</artifactId>
-    <version>5.0.2-SNAPSHOT</version>
+    <version>5.0.3-SNAPSHOT</version>
     <name>Liquibase Vertica Database Integration</name>
     <description>Liquibase extension for HP's Vertica database</description>
     <url>https://github.com/liquibase/liquibase-vertica</url>
@@ -40,7 +40,7 @@
         <slf4j.version>1.7.5</slf4j.version>
         <junit.version>4.13.2</junit.version>
         <postgres.version>9.2-1003-jdbc4</postgres.version>
-        <liquibase.version>5.0.2</liquibase.version>
+        <liquibase.version>5.0.3</liquibase.version>
     </properties>
     <dependencies>
         <dependency>
@@ -57,13 +57,13 @@
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
-            <version>3.0.0</version>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.21.0</version>
+            <version>2.22.0</version>
         </dependency>
     </dependencies>
 

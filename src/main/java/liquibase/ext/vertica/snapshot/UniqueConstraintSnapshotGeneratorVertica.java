@@ -21,7 +21,7 @@ public class UniqueConstraintSnapshotGeneratorVertica extends UniqueConstraintSn
     public int getPriority(Class<? extends DatabaseObject> objectType, Database database) {
         if (database instanceof VerticaDatabase)
             return PRIORITY_DATABASE;
-        return PRIORITY_DEFAULT;
+        return PRIORITY_NONE;
     }
 
     @Override
